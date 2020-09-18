@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@decode/client": "git+ssh://git@gitlab.com:usedecode/public/decode-client#master",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
@@ -15,8 +16,7 @@
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
-    "typescript": "~3.7.2",
-    "@decode/client": "git+ssh://git@gitlab.com:usedecode/public/decode-client#master"
+    "typescript": "~3.7.2"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -38,5 +38,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "cypress": "^5.2.0"
   }
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import { DecodeProvider, useDecode } from "@decode/client";
+import { DecodeProvider, useDecode, ShowDecodeError } from "@decode/client";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import MyTable from "./MyTable";
 
@@ -15,6 +15,16 @@ function App() {
       </Route>
       <Route path="/staging">
         <DecodeProvider env="staging" cacheToken={false}>
+          <MyTable />
+        </DecodeProvider>
+      </Route>
+      <Route path="/noEnv">
+        <DecodeProvider>
+          <MyTable />
+        </DecodeProvider>
+      </Route>
+      <Route path="/cached" env="production" cacheToken={true}>
+        <DecodeProvider>
           <MyTable />
         </DecodeProvider>
       </Route>

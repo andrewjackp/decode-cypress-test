@@ -2,10 +2,10 @@ import React from "react";
 import { useDecode } from "@decode/client";
 
 export default function MyTable() {
-  let { data } = useDecode("listUsers");
+  let { data } = useDecode("getEnv");
   return (
     <div>
-      <p>Data: TODO</p>
+      <p>Data: {data && data.env}</p>
     </div>
   );
 }
