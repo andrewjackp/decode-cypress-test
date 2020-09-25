@@ -23,3 +23,24 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+
+Cypress.Commands.add("login", ({ email, password }) => {
+  cy.visit("/");
+  cy.get("#email").type(email);
+  cy.get("#password").type(password);
+  cy.contains("Log in").click();
+});
+
+Cypress.Commands.add("stagingLogin", ({ email, password }) => {
+  cy.visit("/staging");
+  cy.get("#email").type(email);
+  cy.get("#password").type(password);
+  cy.contains("Log in").click();
+});
+
+Cypress.Commands.add("noEnvLogin", ({ email, password }) => {
+  cy.visit("/noEnv");
+  cy.get("#email").type(email);
+  cy.get("#password").type(password);
+  cy.contains("Log in").click();
+});

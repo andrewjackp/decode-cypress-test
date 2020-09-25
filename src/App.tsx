@@ -1,9 +1,15 @@
 import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import { DecodeProvider, useDecode, ShowDecodeError } from "@decode/client";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import {
+  DecodeProvider,
+  useDecode,
+  ShowDecodeError,
+  useLogout,
+} from "@decode/client";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import MyTable from "./MyTable";
+import { Agent } from "https";
 
 function App() {
   return (
@@ -15,6 +21,11 @@ function App() {
       </Route>
       <Route path="/staging">
         <DecodeProvider env="staging" cacheToken={false}>
+          <MyTable />
+        </DecodeProvider>
+      </Route>
+      <Route exact path="/">
+        <DecodeProvider cacheToken={false}>
           <MyTable />
         </DecodeProvider>
       </Route>
@@ -33,7 +44,7 @@ function App() {
 }
 
 function MyComponent() {
-  let { data } = useDecode("listUsers");
+  let { data } = useDecode("getTest");
 }
 
 export default App;
