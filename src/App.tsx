@@ -9,42 +9,39 @@ import {
 } from "@decode/client";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import MyTable from "./MyTable";
-import { Agent } from "https";
 
 function App() {
   return (
     <Router>
-      <Route path="/production">
-        <DecodeProvider env="production" cacheToken={false}>
-          <MyTable />
-        </DecodeProvider>
-      </Route>
-      <Route path="/staging">
-        <DecodeProvider env="staging" cacheToken={false}>
-          <MyTable />
-        </DecodeProvider>
-      </Route>
-      <Route exact path="/">
-        <DecodeProvider cacheToken={false}>
-          <MyTable />
-        </DecodeProvider>
-      </Route>
-      <Route path="/noEnv">
-        <DecodeProvider>
-          <MyTable />
-        </DecodeProvider>
-      </Route>
-      <Route path="/cached" env="production" cacheToken={true}>
-        <DecodeProvider>
-          <MyTable />
-        </DecodeProvider>
-      </Route>
+      <Switch>
+        <Route path="/production">
+          <DecodeProvider env="production" cacheToken={false}>
+            <MyTable />
+          </DecodeProvider>
+        </Route>
+        <Route path="/staging">
+          <DecodeProvider env="staging" cacheToken={false}>
+            <MyTable />
+          </DecodeProvider>
+        </Route>
+        <Route path="/">
+          <DecodeProvider cacheToken={false}>
+            <MyTable />
+          </DecodeProvider>
+        </Route>
+        <Route path="/noEnv">
+          <DecodeProvider>
+            <MyTable />
+          </DecodeProvider>
+        </Route>
+        <Route path="/cached" env="production" cacheToken={true}>
+          <DecodeProvider>
+            <MyTable />
+          </DecodeProvider>
+        </Route>
+      </Switch>
     </Router>
   );
-}
-
-function MyComponent() {
-  let { data } = useDecode("getTest");
 }
 
 export default App;
