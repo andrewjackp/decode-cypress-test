@@ -5,14 +5,20 @@ describe("Production", () => {
       password: "Ejq&f2Q3wL@8siCw%@",
     };
 
-    cy.login(user);
+    cy.clearCookies();
+    cy.clearLocalStorage();
+
     cy.visit("/production");
     cy.get("#email").type(user.email);
     cy.get("#password").type(user.password);
     cy.contains("Log in").click();
+    cy.contains("Environment: production").should("exist");
 
-    cy.url().should("contain", "/production");
-    cy.wait(2000);
+    cy.contains("Logout").click();
+    cy.visit("/production");
+
+    cy.contains("Environment: production").should("not.exist");
+    cy.contains("Log in").should("exist");
   });
 });
 
@@ -22,9 +28,17 @@ describe("Staging", () => {
       email: "anthony+clientsandbox@usedecode.com",
       password: "Ejq&f2Q3wL@8siCw%@",
     };
-    cy.stagingLogin(user);
-    cy.url().should("contain", "/staging");
-    cy.wait(2000);
+    cy.visit("/staging");
+    cy.visit("/production");
+    cy.get("#email").type(user.email);
+    cy.get("#password").type(user.password);
+    cy.contains("Log in").click();
+    cy.contains("Environment: staging").should("exist");
+    cy.contains("Logout").click();
+    cy.visit("/production");
+    cy.contains("Environment: staging").should("not.exist");
+
+    cy.contains("Log in").should("exist");
   });
 });
 
@@ -37,8 +51,6 @@ describe("NoEnv", () => {
     cy.visit("/noEnv");
     cy.noEnvLogin(user);
     cy.contains("Decode encountered an error").should("exist");
-    cy.visit("/cached");
-    cy.wait(3000);
   });
 });
 
@@ -52,7 +64,6 @@ describe("Cached", () => {
     cy.get("#email").type(user.email);
     cy.get("#password").type(user.password);
     cy.contains("Log in").click();
-    cy.wait(3000);
     cy.reload();
   });
 });
